@@ -1,7 +1,8 @@
 import React from 'react'
 import coffeeMenu from '../data/coffeeMenu'
-
+import { useState } from 'react'
 function CofeMenu() {
+  const [menuDetail, setMenuDetail] = useState(null)
   return (
     <div className="min-h-screen bg-amber-50 py-8 px-4 sm:px-6 lg:px-8">
       <h1 className="text-4xl font-bold text-amber-900 mb-4 text-center">ភិមានកាហ្វេ</h1>
@@ -25,13 +26,39 @@ function CofeMenu() {
               <tr className="text-center w-full">
                 <td className="w-1/4 border-2 h-28 p-2 font-bold text-xl">{coffee.name}</td>
                 <td className="w-1/4 border-2 h-28 p-2 text-lg">{coffee.price} រៀល</td>
-                <td className="w-1/4 border-2 h-28 p-2">{coffee.description.length > 35 ? coffee.description.slice(0, 35) + "...(see more)" : coffee.description}</td>
+                <td className="w-1/4 border-2 h-28 p-2">
+                  {coffee.description.length > 35 ? (
+                    <>
+                      {coffee.description.slice(0, 35)}
+                      <span onClick={() => setMenuDetail(coffee)} className="text-amber-700 cursor-pointer hover:text-amber-900">...See more</span>
+                    </>
+                  ) : (
+                    coffee.description
+                  )}
+                </td>
               </tr>
             </tbody>
           ))}
         </table>
 
       </div>
+      {menuDetail && (
+        <div className="fixed inset-0 bg-black/20 bg-opacity-50 flex items-center justify-center z-50 p-8">
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <h2 className="text-2xl font-bold mb-4">{menuDetail.name}</h2>
+            <p className="text-lg mb-4">{menuDetail.description}</p>
+            <p className="text-lg mb-4 text-red-500">{menuDetail.price} រៀល</p>
+            <div className="flex justify-end">
+              <button
+                onClick={() => setMenuDetail(null)}
+                className="bg-amber-700 text-white px-4 py-2 rounded hover:bg-amber-600"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
