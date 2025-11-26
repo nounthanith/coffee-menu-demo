@@ -5,14 +5,14 @@ import TextPressure from '../ui/TextPressure'
 function CofeMenu() {
   const [menuDetail, setMenuDetail] = useState(null)
   return (
-    <div className="min-h-screen bg-amber-50 py-8 px-4 sm:px-6 lg:px-8">
+    <div className=" bg-amber-50 py-8 px-4 sm:px-6 lg:px-8 h-fit">
       <h1 className="text-4xl font-bold text-amber-900 mb-4 text-center">ភិមានកាហ្វេ</h1>
       <p className="text-amber-700 text-lg max-w-2xl mx-auto text-center">
         ការជ្រើសរើសកាហ្វេលំដាប់ថ្នាក់ខ្ពស់ដែលផលិតយ៉ាងយកចិត្តទុកដាក់របស់យើង។
       </p>
-      <div className="w-24 h-1 bg-amber-700 mx-auto rounded-full mt-4 mb-4"></div>
+      <div className="w-24 h-1  bg-amber-700 mx-auto rounded-full mt-4 mb-4"></div>
 
-      <div className="max-w-7xl mx-auto h-[700px] overflow-y-auto scrollbar-hide">
+      <div className="max-w-7xl mx-auto h-[600px] overflow-y-auto scrollbar-hide">
 
         <table className="w-full">
           <thead className="sticky top-0 z-20 bg-amber-50 ring-1">
@@ -63,7 +63,7 @@ function CofeMenu() {
       )}
 
       <div className="w-fit h-fit bg-amber-700 mx-auto rounded-full mt-4 mb-4"></div>
-      <div className="max-w-7xl mx-auto h- border-b">
+      <div className="max-w-7xl mx-auto border-b">
         <TextPressure
           text="Thank you for your order!"
           flex={true}
