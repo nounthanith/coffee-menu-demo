@@ -1,6 +1,7 @@
 import React from 'react'
 import coffeeMenu from '../data/coffeeMenu'
 import { useState } from 'react'
+import TextPressure from '../ui/TextPressure'
 function CofeMenu() {
   const [menuDetail, setMenuDetail] = useState(null)
   return (
@@ -11,18 +12,19 @@ function CofeMenu() {
       </p>
       <div className="w-24 h-1 bg-amber-700 mx-auto rounded-full mt-4 mb-4"></div>
 
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto h-[700px] overflow-y-auto scrollbar-hide">
 
         <table className="w-full">
-          <thead>
-            <tr className="text-center w-full">
+          <thead className="sticky top-0 z-20 bg-amber-50 ring-1">
+            <tr className="border-b-2 border-amber-700">
               <th className="w-1/4 border-2 p-2">ឈ្មោះ</th>
               <th className="w-1/4 border-2 p-2">តម្លៃ</th>
               <th className="w-1/4 border-2 p-2">លម្អិត</th>
             </tr>
           </thead>
+
           {coffeeMenu.map((coffee) => (
-            <tbody key={coffee.id}>
+            <tbody key={coffee.id} className="">
               <tr className="text-center w-full">
                 <td className="w-1/4 border-2 h-28 p-2 font-bold text-xl">{coffee.name}</td>
                 <td className="w-1/4 border-2 h-28 p-2 text-lg">{coffee.price} រៀល</td>
@@ -43,7 +45,7 @@ function CofeMenu() {
 
       </div>
       {menuDetail && (
-        <div className="fixed inset-0 bg-black/20 bg-opacity-50 flex items-center justify-center z-50 p-8">
+        <div className="fixed inset-0 bg-black/20 bg-opacity-50 flex items-center justify-center z-100 p-8">
           <div className="bg-white p-6 rounded-lg shadow-lg">
             <h2 className="text-2xl font-bold mb-4">{menuDetail.name}</h2>
             <p className="text-lg mb-4">{menuDetail.description}</p>
@@ -59,6 +61,23 @@ function CofeMenu() {
           </div>
         </div>
       )}
+
+      <div className="w-fit h-fit bg-amber-700 mx-auto rounded-full mt-4 mb-4"></div>
+      <div className="max-w-7xl mx-auto h- border-b">
+        <TextPressure
+          text="Thank you for your order!"
+          flex={true}
+          alpha={false}
+          stroke={false}
+          width={true}
+          weight={true}
+          italic={true}
+          textColor="#000"
+          strokeColor="#ff0000"
+          minFontSize={20}
+        />
+      </div>
+
     </div>
   )
 }
