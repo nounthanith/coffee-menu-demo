@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@font-face {
+    font-family: 'Chenla';
+    src: url('assets/fonts/Chenla-Regular.ttf');
+}
+
+body {
+    font-family: 'Chenla', sans-serif;
+}
