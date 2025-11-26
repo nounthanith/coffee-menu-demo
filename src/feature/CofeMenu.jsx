@@ -15,11 +15,11 @@ function CofeMenu() {
       <div className="max-w-7xl mx-auto h-[600px] overflow-y-auto scrollbar-hide">
 
         <table className="w-full">
-          <thead className="sticky top-0 z-20 bg-amber-50 ring-1">
+          <thead className="sticky top-0 z-20 bg-amber-50 ring-2">
             <tr className="border-b-2 border-amber-700">
-              <th className="w-1/4 border-2 p-2">ឈ្មោះ</th>
-              <th className="w-1/4 border-2 p-2">តម្លៃ</th>
-              <th className="w-1/4 border-2 p-2">លម្អិត</th>
+              <th className="w-1/4 border-2 ring-2 p-2">ឈ្មោះ</th>
+              <th className="w-1/4 border-2 ring-2 p-2">តម្លៃ</th>
+              <th className="w-1/4 border-2 ring-2 p-2">លម្អិត</th>
             </tr>
           </thead>
 
