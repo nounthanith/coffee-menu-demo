@@ -1,14 +1,17 @@
 import React from 'react'
-import CoffeeMenu from './feature/CofeMenu'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import CofeMenuDetail from './feature/CofeMenuDetail'
+import Home from './feature/home/Home'
+import Navbar from './layouts/Navbar'
+import NotFoundPage from './ui/NotFoundPage'
 function App() {
     return (
         <>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<CoffeeMenu />} />
-                    <Route path="/coffee/:id" element={<CofeMenuDetail />} />
+                    <Route path="/" element={<Navbar />} >
+                        <Route index element={<Home />} />
+                        <Route path='*' element={<NotFoundPage /> } />
+                    </Route>
                 </Routes>
             </BrowserRouter>
         </>
