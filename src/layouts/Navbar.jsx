@@ -77,7 +77,7 @@ function Navbar() {
 
             <div style={{ height: showHeader ? headerHeight : 0 }} />
 
-            <nav className="sticky top-0 z-60 backdrop-blur supports-backdrop-filter:bg-white/60 bg-white/80 border-b">
+            <nav className="sticky top-0 z-60 backdrop-blur supports-backdrop-filter:bg-white bg-white border-b">
                 <div className="max-w-6xl mx-auto px-4">
                     <div className="h-14 flex items-center justify-between gap-3">
                         <div className="flex items-center space-x-1 ">
