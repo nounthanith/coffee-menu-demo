@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './feature/home/Home'
 import Navbar from './layouts/Navbar'
 import NotFoundPage from './ui/NotFoundPage'
+import Detail from './feature/home/Detail'
 function App() {
     return (
         <>
@@ -10,7 +11,9 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Navbar />} >
                         <Route index element={<Home />} />
-                        <Route path='*' element={<NotFoundPage /> } />
+                        <Route path='*' element={<NotFoundPage />} />
+                        <Route path="products/:id" element={<Detail />} /> {/* <-- add */}
+
                     </Route>
                 </Routes>
             </BrowserRouter>

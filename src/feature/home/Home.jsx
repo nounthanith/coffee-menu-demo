@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import useProduct from "./useProduct";
 import { HiOutlineChevronLeft, HiOutlineChevronRight } from 'react-icons/hi';
-import { MdLocalCafe } from 'react-icons/md';
+import { FaBookOpen } from 'react-icons/fa'; // Changed icon to represent 'learning/menu'
 
 function Home() {
   const {
@@ -22,7 +22,7 @@ function Home() {
   const [searchParams] = useSearchParams();
   const q = searchParams.get("q") || "";
 
-  // Debounce for smooth searching
+  // Debounce for smooth searching (Kept functional logic)
   useEffect(() => {
     if (typing) clearTimeout(typing);
 
@@ -36,32 +36,41 @@ function Home() {
   const totalPages = total ? Math.ceil(total / limit) : 1;
 
   return (
+    // Simple, neutral background
     <div className="min-h-[calc(100vh-56px)]">
-      <div className="max-w-7xl mx-auto px-4 py-8 space-y-8">
+      <div className="max-w-7xl mx-auto px-4 space-y-10">
 
-        {/* Title / Hero */}
-        <div className="relative overflow-hidden rounded-2xl bg-white">
-          <div className="absolute inset-0 bg-amber-100/50" />
-          <div className="relative flex flex-col sm:flex-row items-center gap-4 p-6 sm:p-8">
-            <div className="shrink-0 h-14 w-14 rounded-xl bg-amber-600 text-white grid place-content-center shadow">
-              <MdLocalCafe size={28} />
+        {/* Title / Hero - **Squared/Bordered Style** */}
+        <div className="relative overflow-hidden bg-white border-2 border-gray-700"> {/* Strong border and no rounding */}
+          <div className="relative flex flex-col sm:flex-row items-center justify-between gap-6 p-6">
+
+            {/* Left side: Icon and Text */}
+            <div className="flex items-center gap-4">
+              {/* Icon container is square and uses the primary color (Emerald) */}
+              <div className="shrink-0 h-12 w-12 bg-emerald-600 text-white grid place-content-center border-2 border-gray-700">
+                <FaBookOpen size={24} />
+              </div>
+              <div className="text-center sm:text-left">
+                {/* Bolder, clean title */}
+                <h1 className="text-3xl font-mono font-bold text-gray-900">Product Catalog Explorer</h1>
+                <p className="text-base text-gray-600 mt-1">{q ? `Search results for “${q}”` : 'A structured view of all available items.'}</p>
+              </div>
             </div>
-            <div className="text-center sm:text-left">
-              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Discover your next coffee</h1>
-              <p className="text-gray-600 mt-1">{q ? `Showing results for “${q}”` : 'Browse our latest drinks and desserts'}</p>
-            </div>
-            <div className="sm:ml-auto flex items-center gap-3">
-              <div className="text-sm text-gray-600 hidden sm:block">Total: <span className="font-medium">{total ?? 0}</span></div>
+
+            {/* Right side: Total and Limit Selector */}
+            <div className="flex items-center gap-4 shrink-0 mt-4 sm:mt-0">
+              <div className="text-sm text-gray-700 font-medium">Total: <span className="font-extrabold text-emerald-600">{total ?? 0}</span></div>
               <div className="flex items-center gap-2">
                 <label className="text-sm text-gray-600">Per page</label>
                 <select
-                  className="border px-3 py-2 rounded-lg shadow-sm focus:ring-2 focus:ring-amber-500"
+                  // Selector is square with a prominent border
+                  className="border-2 border-gray-700 px-3 py-2 bg-white text-gray-900 focus:ring-0 focus:border-emerald-600"
                   value={limit}
                   onChange={(e) => setLimit(Number(e.target.value))}
                 >
-                  <option value={1}>1</option>
-                  <option value={5}>5</option>
-                  <option value={10}>10</option>
+                  <option value={8}>8</option>
+                  <option value={12}>12</option>
+                  <option value={24}>24</option>
                 </select>
               </div>
             </div>
@@ -70,19 +79,22 @@ function Home() {
 
         {/* Error */}
         {error && (
-          <div className="rounded-xl border-red-200 bg-red-50 p-4 text-red-700">Failed to load products</div>
+          // Error box is now square with a strong red border
+          <div className="border-2 border-red-700 bg-red-100 p-4 text-red-800 font-medium">
+            <span className="font-bold">ERROR:</span> Failed to retrieve data.
+          </div>
         )}
 
-        {/* Loading skeletons */}
+        {/* Loading skeletons (Adjusted styling) */}
         {loading && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {Array.from({ length: 8 }).map((_, i) => (
-              <div key={i} className="bg-white rounded-2xl overflow-hidden">
-                <div className="h-44 bg-gray-100 animate-pulse" />
+              // Skeletons are square with gray borders
+              <div key={i} className="bg-white border-2 border-gray-300 overflow-hidden">
+                <div className="h-48 bg-gray-200 animate-pulse" />
                 <div className="p-4 space-y-3">
-                  <div className="h-5 w-2/3 bg-gray-100 rounded animate-pulse" />
-                  <div className="h-4 w-1/3 bg-gray-100 rounded animate-pulse" />
-                  <div className="h-6 w-24 bg-gray-100 rounded animate-pulse" />
+                  <div className="h-6 w-3/4 bg-gray-200 animate-pulse" />
+                  <div className="h-4 w-1/2 bg-gray-200 animate-pulse" />
                 </div>
               </div>
             ))}
@@ -91,42 +103,52 @@ function Home() {
 
         {/* Empty state */}
         {!loading && products.length === 0 && (
-          <div className="text-center py-20 rounded-2xl bg-white">
-            <p className="text-lg font-semibold text-gray-800">No products found</p>
-            <p className="text-gray-600">Try adjusting your search or filters.</p>
+          <div className="text-center py-20 bg-white border-2 border-gray-700">
+            <p className="text-xl font-bold text-gray-800">No Items Found</p>
+            <p className="text-gray-600 mt-2">Try adjusting your search query.</p>
           </div>
         )}
 
-        {/* Product List */}
+        {/* Product List - **Squared/Bordered Card** */}
         {!loading && products.length > 0 && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
             {products.map((p) => (
               <div
                 key={p._id}
-                className="group bg-white rounded-2xl hover:border-amber-200 transition overflow-hidden shadow-sm hover:shadow-md"
+                // The main card style: sharp corners, prominent border, hover effect using border color
+                className="group bg-white overflow-hidden border-2 border-gray-700 transition duration-300 hover:border-emerald-600"
               >
                 {/* Image */}
-                <div className="relative w-full h-48 bg-gray-100 overflow-hidden">
+                <div className="relative w-full h-48 bg-gray-100 overflow-hidden border-b-2 border-gray-700 group-hover:border-emerald-600">
                   <img
-                    src={`http://localhost:3000/${p.image}`}
+                    src={import.meta.env.VITE_BASE_URL + "/" + `${p.image}`}
                     alt={p.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-cover transition-transform duration-300"
                   />
                   {p.category?.name && (
-                    <span className="absolute top-3 left-3 inline-flex items-center px-2 py-0.5 text-xs rounded-full bg-white/90 border shadow-sm">
+                    // Category tag is square and uses the accent color
+                    <span className="absolute top-0 right-0 inline-flex items-center px-3 py-1 text-xs font-semibold bg-emerald-600 text-white border-l-2 border-b-2 border-gray-700">
                       {p.category.name}
                     </span>
                   )}
                 </div>
 
                 {/* Info */}
-                <div className="p-4">
-                  <h2 className="text-base font-semibold text-gray-900 line-clamp-1">{p.name}</h2>
-                  <div className="mt-2 flex items-center justify-between">
-                    <p className="text-amber-700 font-bold text-lg">
-                      {p.price.toLocaleString()} ៛
+                <div className="p-1 space-y-2">
+                  <h2 className="text-lg font-bold text-gray-900 line-clamp-1">{p.name}</h2>
+
+                  <div className="flex items-center justify-between pt-1 border-t border-gray-200">
+                    {/* Price styled with accent color */}
+                    <p className="text-sm font-extrabold text-emerald-600">
+                      {p.price.toLocaleString()}៛
                     </p>
-                    <p className="text-xs text-gray-500">{new Date(p.createdAt).toLocaleDateString()}</p>
+                    {/* Simple button style */}
+                    <Link
+                      to={`/products/${p._id}`}
+                      className="text-sm font-semibold px-3 py-1 border-2 border-gray-700 bg-white text-gray-700 hover:bg-emerald-100 hover:border-emerald-600 transition"
+                    >
+                      Details
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -134,30 +156,34 @@ function Home() {
           </div>
         )}
 
-        {/* Pagination */}
-        <div className="flex items-center justify-center gap-4">
-          <button
-            onClick={prevPage}
-            disabled={page === 1}
-            className="inline-flex items-center gap-1 px-4 py-2 rounded-lg border bg-white hover:bg-amber-50 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <HiOutlineChevronLeft />
-            Prev
-          </button>
+        {/* Pagination - **Squared/Bordered Style** */}
+        {products.length > 0 && (
+          <div className="flex items-center justify-center gap-6 pt-6">
+            <button
+              onClick={prevPage}
+              disabled={page === 1}
+              // Pagination buttons are square, bordered, and use the accent color on hover
+              className="inline-flex items-center gap-2 px-4 py-2 border-2 border-gray-700 bg-white text-gray-700 font-semibold transition duration-150 hover:bg-emerald-50 hover:border-emerald-600 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <HiOutlineChevronLeft size={18} />
+              Previous
+            </button>
 
-          <span className="text-sm font-medium text-gray-700">
-            Page {page} / {totalPages}
-          </span>
+            <span className="text-base font-bold text-gray-800 border-2 border-gray-700 px-4 py-2 bg-white">
+              Page <span className="text-emerald-600">{page}</span> / {totalPages}
+            </span>
 
-          <button
-            onClick={nextPage}
-            disabled={page >= totalPages}
-            className="inline-flex items-center gap-1 px-4 py-2 rounded-lg border bg-white hover:bg-amber-50 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            Next
-            <HiOutlineChevronRight />
-          </button>
-        </div>
+            <button
+              onClick={nextPage}
+              disabled={page >= totalPages}
+              // Pagination buttons are square, bordered, and use the accent color on hover
+              className="inline-flex items-center gap-2 px-4 py-2 border-2 border-gray-700 bg-white text-gray-700 font-semibold transition duration-150 hover:bg-emerald-50 hover:border-emerald-600 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Next
+              <HiOutlineChevronRight size={18} />
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
