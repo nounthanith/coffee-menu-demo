@@ -48,7 +48,7 @@ function Loading({ children, duration = 1200, brand = "ភិមាន កាហ
                         <div className="flex items-center space-x-2">
                             <div className="h-6 w-6 bg-emerald-600 border-2 border-gray-700" /> {/* Squared Icon placeholder */}
                             <h1 className="text-2xl font-mono font-bold text-gray-900 tracking-wider">
-                                {brand.toUpper​Case()}
+                                {brand}
                             </h1>
                         </div>
 
