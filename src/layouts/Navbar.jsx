@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { NavLink, Outlet, useSearchParams } from 'react-router-dom'
+import { Link, NavLink, Outlet, useSearchParams } from 'react-router-dom'
 import Header from './Header'
 import { FaBars } from 'react-icons/fa'
 import { HiOutlineX } from "react-icons/hi";
@@ -127,11 +127,12 @@ function Navbar() {
                         {/* Mobile Toggle & Sign In Button */}
                         <div className="flex items-center space-x-3">
                             {/* Sign In Button - Squared/Bordered */}
-                            <button 
+                            <Link 
+                                to="/admin/signin"
                                 className="hidden md:inline-flex items-center h-9 px-3 border-2 border-gray-700 bg-emerald-600 text-white font-mono font-bold hover:bg-emerald-700 transition"
                             >
                                 Sign in
-                            </button>
+                            </Link>
                             {/* Mobile Toggle Button - Squared/No rounding */}
                             <button
                                 aria-label="Toggle menu"
@@ -159,13 +160,14 @@ function Navbar() {
                                     {item.label}
                                 </NavLink>
                             ))}
-                            {/* Mobile Sign In Button - Squared/Bordered */}
-                            <button 
+                            {/* Mobile Sign In Button */}
+                            <Link 
+                                to="/admin/signin"
                                 className="mt-2 inline-flex items-center h-9 px-3 border-2 border-gray-700 bg-emerald-600 text-white font-mono font-bold hover:bg-emerald-700 transition" 
                                 onClick={() => setMobileOpen(false)}
                             >
                                 Sign in
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 )}
