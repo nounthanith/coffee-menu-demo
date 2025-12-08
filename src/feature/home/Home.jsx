@@ -90,7 +90,7 @@ function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {Array.from({ length: 8 }).map((_, i) => (
               // Skeletons are square with gray borders
-              <div key={i} className="bg-white border-2 border-gray-300 overflow-hidden">
+              <div key={i} className="bg-white border border-gray-300 overflow-hidden">
                 <div className="h-48 bg-gray-200 animate-pulse" />
                 <div className="p-4 space-y-3">
                   <div className="h-6 w-3/4 bg-gray-200 animate-pulse" />
@@ -103,7 +103,7 @@ function Home() {
 
         {/* Empty state */}
         {!loading && products.length === 0 && (
-          <div className="text-center py-20 bg-white border-2 border-gray-700">
+          <div className="text-center py-20 bg-white border border-gray-700">
             <p className="text-xl font-bold text-gray-800">No Items Found</p>
             <p className="text-gray-600 mt-2">Try adjusting your search query.</p>
           </div>
@@ -111,19 +111,19 @@ function Home() {
 
         {/* Product List - **Squared/Bordered Card** */}
         {!loading && products.length > 0 && (
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
             {products.map((p) => (
               <div
                 key={p._id}
                 // The main card style: sharp corners, prominent border, hover effect using border color
-                className="group bg-white overflow-hidden border-2 border-gray-700 transition duration-300 hover:border-emerald-600"
+                className="group bg-white overflow-hidden border rounded-sm hover:shadow-[-5px_5px] hover:-translate-y-3 transition-all ease-out duration-500 border-gray-700"
               >
                 {/* Image */}
                 <div className="relative w-full h-48 bg-gray-100 overflow-hidden border-b-2 border-gray-700 group-hover:border-emerald-600">
                   <img
                     src={import.meta.env.VITE_BASE_URL + "/" + `${p.image}`}
                     alt={p.name}
-                    className="w-full h-full object-cover transition-transform duration-300"
+                    className="w-full h-full object-cover transition-transform duration-300 ease-out"
                   />
                   {p.category?.name && (
                     // Category tag is square and uses the accent color
@@ -145,7 +145,7 @@ function Home() {
                     {/* Simple button style */}
                     <Link
                       to={`/products/${p._id}`}
-                      className="text-sm font-semibold px-3 py-1 border-2 border-gray-700 bg-white text-gray-700 hover:bg-emerald-100 hover:border-emerald-600 transition"
+                      className="text-sm font-semibold px-3 py-1 border rounded-sm border-gray-700 bg-white text-gray-700 hover:bg-emerald-100 hover:border-emerald-600 transition"
                     >
                       Details
                     </Link>
@@ -163,13 +163,13 @@ function Home() {
               onClick={prevPage}
               disabled={page === 1}
               // Pagination buttons are square, bordered, and use the accent color on hover
-              className="inline-flex items-center gap-2 px-4 py-2 border-2 border-gray-700 bg-white text-gray-700 font-semibold transition duration-150 hover:bg-emerald-50 hover:border-emerald-600 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="inline-flex items-center gap-2 px-4 py-2 border rounded-lg border-gray-700 bg-white text-gray-700 font-semibold transition duration-150 hover:bg-emerald-50 hover:border-emerald-600 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <HiOutlineChevronLeft size={18} />
               Previous
             </button>
 
-            <span className="text-base font-bold text-gray-800 border-2 border-gray-700 px-4 py-2 bg-white">
+            <span className="text-base font-bold text-gray-800 border rounded-lg border-gray-700 px-4 py-2 bg-white">
               Page <span className="text-emerald-600">{page}</span> / {totalPages}
             </span>
 
@@ -177,7 +177,7 @@ function Home() {
               onClick={nextPage}
               disabled={page >= totalPages}
               // Pagination buttons are square, bordered, and use the accent color on hover
-              className="inline-flex items-center gap-2 px-4 py-2 border-2 border-gray-700 bg-white text-gray-700 font-semibold transition duration-150 hover:bg-emerald-50 hover:border-emerald-600 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="inline-flex items-center gap-2 px-4 py-2 border rounded-lg border-gray-700 bg-white text-gray-700 font-semibold transition duration-150 hover:bg-emerald-50 hover:border-emerald-600 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Next
               <HiOutlineChevronRight size={18} />
